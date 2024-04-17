@@ -191,9 +191,9 @@ clock_divider_inst2: clock_divider
 	-- CONCURRENT STATEMENTS ----------------------------
 	
 	-- LED 15 gets the FSM slow clock signal. The rest are grounded.
---	led <= (15 => w_clk, others => '0');
-w_clk <= led(15);
-led(14 downto 0) <= (others => '0');
+-led <= (15 => w_clk, others => '0');
+--w_clk <= led(15);
+--led(14 downto 0) <= (others => '0');
 w_tens <= "0001" when unsigned (w_floor) > 9 or w_floor = "0000" else "0000";
 w_ones <= "0000" when unsigned (w_floor) = 10 else 
           "0001" when unsigned (w_floor) = 11
