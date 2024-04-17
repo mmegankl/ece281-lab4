@@ -138,6 +138,7 @@ end component TDM4;
     signal w_floor, w_ones, w_tens : std_logic_vector(3 downto 0) := (others => '0');       
     signal c_Sa, c_Sb, c_Sc, c_Sd, c_Se, c_Sf, c_Sg : std_logic;
     signal w_sel, w_data : std_logic_vector (3 downto 0);
+    signal w_reset_FSM, w_reset_clk : std_logic;
 
   
 begin
@@ -145,7 +146,7 @@ begin
 	elevator_controller_fsm_inst: elevator_controller_fsm
       port map (
          i_clk           => w_clk,
-         i_reset         => btnR or btnU,
+         i_reset         => w_reset_FSM or w_reset_clk,
          i_stop          => sw(0),
          i_up_down       => sw(1),        
          o_floor         => w_floor(3 downto 0)
@@ -162,7 +163,7 @@ begin
           generic map ( k_DIV => 50000000 ) -- convert MHz to Hz 
           port map (                          
               i_clk   => clk,
-              i_reset => btnL or btnU,
+              i_reset => w_reset_FSM or w_reset_clk,
               o_clk   => w_clk
           ); 
           
@@ -182,7 +183,7 @@ clock_divider_inst2: clock_divider
  generic map ( k_DIV => 100000 ) -- convert MHz to Hz 
            port map (                          
                i_clk   => clk,
-               i_reset => btnL or btnU,
+               i_reset => w_reset_FSM or w_reset_clk,
                o_clk   => w_clk2
            ); 
 
@@ -203,6 +204,8 @@ w_ones <= "0000" when unsigned (w_floor) = 10 else
           else "0101" when unsigned (w_floor) = 15
           else "0110" when unsigned (w_floor) = 0
           else w_floor;
+w_reset_FSM <= btnU or btnR;
+w_reset_clk <= btnU or btnL;
 	-- leave unused switches UNCONNECTED. Ignore any warnings this causes.
 	
 	-- wire up active-low 7SD anodes (an) as required
