@@ -68,7 +68,7 @@ end TDM4;
 
 architecture behavioral of TDM4 is
 
-	signal   f_sel		 : unsigned(1 downto 0)	:= "00"; -- 2 bit counter output to select MUX input
+	signal   f_sel		 : unsigned(3 downto 0)	:= "00"; -- 2 bit counter output to select MUX input
 	
 begin	
 	
@@ -91,15 +91,15 @@ begin
 	-- CONCURRENT STATEMENTS ----------------------------
 	
 	-- output MUXs
-	o_DATA <= i_D3 when f_sel = "11" else
-			  i_D2 when f_sel = "10" else
-			  i_D1 when f_sel = "01" else
-			  i_D0;
+	o_DATA <=  i_D3  when f_sel = "0011" else
+	 		   i_D2  when f_sel = "0010" else
+			   i_D1  when f_sel = "0001" else
+			   i_D0;
 			  
 	o_SEL  <=  "0111" when f_sel = "11" else
-			   "1011" when f_sel = "10" else
-			   "1101" when f_sel = "01" else
-			   "1110";
+	           "1011" when f_sel = "10" else
+	           "1101" when f_sel = "01" else 
+	           "1110";
 		
 end behavioral;
 
