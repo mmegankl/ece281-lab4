@@ -205,6 +205,7 @@ w_ones <= "0000" when unsigned (w_floor) = 10 else
           else "0101" when unsigned (w_floor) = 15
           else "0110" when unsigned (w_floor) = 0
           else w_floor;
+          
 w_reset_FSM <= btnU or btnR;
 w_reset_clk <= btnU or btnL;
 	-- leave unused switches UNCONNECTED. Ignore any warnings this causes.
@@ -212,6 +213,10 @@ w_reset_clk <= btnU or btnL;
 	-- wire up active-low 7SD anodes (an) as required
 	-- Tie any unused anodes to power ('1') to keep them off
 --	an <= (2 => '0', others => '1');
-an <= ((3 =>w_sel(3)), (2 => w_sel(2)), others => '1');	
-	
+--an <= ((3 =>w_sel(3)), (2 => w_sel(2)), others => '1');	
+an(3) <= w_sel(3);
+an(2) <= w_sel(2);
+an(1) <= '1';
+an(0) <= '1';	
+
 end top_basys3_arch;
