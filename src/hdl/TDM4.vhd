@@ -68,7 +68,7 @@ end TDM4;
 
 architecture behavioral of TDM4 is
 
-	signal   f_sel		 : unsigned(3 downto 0)	:= "00"; -- 2 bit counter output to select MUX input
+	signal   f_sel		 : unsigned(1 downto 0)	:= "00"; -- 2 bit counter output to select MUX input
 	
 begin	
 	
