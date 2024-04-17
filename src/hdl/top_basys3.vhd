@@ -146,7 +146,7 @@ begin
 	elevator_controller_fsm_inst: elevator_controller_fsm
       port map (
          i_clk           => w_clk,
-         i_reset         => w_reset_FSM or w_reset_clk,
+         i_reset         => w_reset_FSM,
          i_stop          => sw(0),
          i_up_down       => sw(1),        
          o_floor         => w_floor(3 downto 0)
@@ -163,13 +163,14 @@ begin
           generic map ( k_DIV => 50000000 ) -- convert MHz to Hz 
           port map (                          
               i_clk   => clk,
-              i_reset => w_reset_FSM or w_reset_clk,
+              i_reset => w_reset_clk,
               o_clk   => w_clk
           ); 
           
 TDM4_inst: TDM4
     generic map ( k_WIDTH => 4)
-    Port map ( i_clk        => w_clk2,
+    Port map ( 
+        i_clk        => w_clk2,
         i_reset        => '0',
         i_D3         => w_tens,
         i_D2         => w_ones,
@@ -183,7 +184,7 @@ clock_divider_inst2: clock_divider
  generic map ( k_DIV => 100000 ) -- convert MHz to Hz 
            port map (                          
                i_clk   => clk,
-               i_reset => w_reset_FSM or w_reset_clk,
+               i_reset => w_reset_clk,
                o_clk   => w_clk2
            ); 
 
