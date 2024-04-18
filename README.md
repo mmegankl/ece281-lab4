@@ -27,3 +27,5 @@ env:
 If successful then GHDL will quietly exit with a `0` code.
 If any of the `assert` statements fail **with** `severity failure` then GHDL will cease the simulation and exit with non-zero code; this will also cause the workflow to fail.
 Assert statements of other severity levels, such as "error" w
+
+Documentation Statement: I collaborated with C3C Cook and C3C Morales as lab partners to complete the code in Vivado. All three of us attended a video conference EI session on 16Apr with Lt Col Trimble to fix any errors and complete the advanced functionality aspect of the lab. 
